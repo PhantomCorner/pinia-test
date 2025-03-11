@@ -5,7 +5,7 @@ export const useTodoStore = defineStore("todoStore", {
   }),
   getters: {
     markDone: (state) => {
-      state.todos.filter((todo) => todo.done);
+      return state.todos.filter((todo) => todo.done === true);
     },
   },
   actions: {
