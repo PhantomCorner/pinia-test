@@ -24,6 +24,7 @@ const onLogout = async () => {
     <button @click="countStore.increment()">+1</button> -->
     <input type="text" v-model="userData.username" />
     <input type="password" v-model="userData.pwd" />
+    <p>{{ userStore.hello }}</p>
     <button @click="onLogin">Login</button>
     <button @click="onLogout">Logout</button>
   </div>
