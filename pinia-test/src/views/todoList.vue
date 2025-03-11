@@ -4,6 +4,7 @@ import { ref } from "vue";
 const todoStore = useTodoStore();
 const showDoneOnly = ref(false);
 const inputValue = ref("");
+
 const addTodo = () => {
   todoStore.addTodo(inputValue.value);
   inputValue.value = "";
@@ -11,8 +12,10 @@ const addTodo = () => {
 const togglgDone = (id) => {
   todoStore.doneTodo(id);
 };
-const filterDone = () => {
-  showDoneOnly.value = !showDoneOnly.value;
+const filterDone = (val) => {
+  if (val) todoStore.filter = "done";
+  if (!val) todoStore.filter = "undone";
+  if (val === "all") todoStore.filter = "all";
 };
 const todoClass = (status) => {
   let defaultClass = "todo-container";
@@ -27,11 +30,11 @@ const todoClass = (status) => {
     <h1>To do List</h1>
     <input type="text" v-model="inputValue" />
     <button @click="addTodo">Add</button>
-    <button @click="filterDone">
-      {{ showDoneOnly ? "Show All" : "Show Done Only" }}
-    </button>
+    <button @click="filterDone('all')">Show All</button>
+    <button @click="filterDone(true)">Done only</button>
+    <button @click="filterDone(false)">Undone Only</button>
     <div
-      v-for="todo in showDoneOnly ? todoStore.markDone : todoStore.todos"
+      v-for="todo in todoStore.filterTodos"
       :key="todo.id"
       :class="todoClass(todo.done)"
     >

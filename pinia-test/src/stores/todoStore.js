@@ -2,10 +2,19 @@ import { defineStore } from "pinia";
 export const useTodoStore = defineStore("todoStore", {
   state: () => ({
     todos: [],
+    filter: "all",
   }),
   getters: {
-    markDone: (state) => {
-      return state.todos.filter((todo) => todo.done === true);
+    filterTodos() {
+      if (this.filter === "all") {
+        return this.todos;
+      }
+      if (this.filter === "done") {
+        return this.todos.filter((todo) => todo.done === true);
+      }
+      if (this.filter === "undone") {
+        return this.todos.filter((todo) => todo.done === false);
+      }
     },
   },
   actions: {
