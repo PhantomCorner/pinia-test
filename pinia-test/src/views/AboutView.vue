@@ -1,8 +1,6 @@
 <script setup>
 import { ref } from "vue";
-import { useCounterStore } from "../stores/counter";
 import { useUserStore } from "../stores/user";
-const countStore = useCounterStore();
 const userData = ref({
   username: "",
   pwd: "",
